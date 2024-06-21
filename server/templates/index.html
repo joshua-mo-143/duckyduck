@@ -1,0 +1,11 @@
+{% extends "base.html" %} {% block content %}
+<form id="my-form" hx-post="/prompt" hx-target="#response" hx-swap="innerHTML">
+  <label>
+    <span>Prompt:</span>
+    <input name="prompt" placeholder="Prompt goes here..." />
+  </label>
+  <button type="submit">Submit</button>
+</form>
+
+<div id="response"></div>
+{% endblock %}

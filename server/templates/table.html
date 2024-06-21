@@ -1,0 +1,19 @@
+<table>
+  <tr>
+    <th>Module</th>
+    <th>Type</th>
+    <th>Docstring</th>
+    <th>Type Signature</th>
+  </tr>
+  {% for result in results %}
+  <tr>
+    <td>{{result.name}}</td>
+    <td>{{result.code_type}}</td>
+    <td>
+      {% match result.docstring %} {% when Some with (val) %} {{ val }} {% when
+      None %} No docstring {% endmatch %}
+    </td>
+    <td>{{result.signature}}</td>
+  </tr>
+  {% endfor %}
+</table>

@@ -1,0 +1,16 @@
+[package]
+name = "server"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+askama = { version = "0.12.1", features = ["with-axum"] }
+askama_axum = "0.4.0"
+axum = "0.7.5"
+llms = { version = "0.1.0", path = "../llms" }
+parser = { version = "0.0.0", path = "../parser" }
+serde = { version = "1.0.203", features = ["derive"] }
+tera = "1.20.0"
+tokio = { version = "1.38.0", features = ["full"] }
