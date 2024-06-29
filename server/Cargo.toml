@@ -9,6 +9,11 @@ edition = "2021"
 askama = { version = "0.12.1", features = ["with-axum"] }
 askama_axum = "0.4.0"
 axum = "0.7.5"
+axum-streams = { version = "0.17.0", features = ["text"] }
+candle-core = "0.5.1"
+candle-nn = "0.5.1"
+candle-transformers = "0.5.1"
+futures = "0.3.30"
 llms = { version = "0.1.0", path = "../llms" }
 parser = { version = "0.0.0", path = "../parser" }
 serde = { version = "1.0.203", features = ["derive"] }

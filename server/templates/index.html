@@ -1,11 +1,51 @@
 {% extends "base.html" %} {% block content %}
 <form id="my-form" hx-post="/prompt" hx-target="#response" hx-swap="innerHTML">
   <label>
-    <span>Prompt:</span>
+    <span>Code Search prompt:</span>
     <input name="prompt" placeholder="Prompt goes here..." />
   </label>
   <button type="submit">Submit</button>
 </form>
 
+<form id="prompt-form">
+  <label>
+    <span>Text prompt:</span>
+    <input id="prompt-box" name="prompt" placeholder="Prompt goes here..." />
+  </label>
+  <button id="submit-button">Submit</button>
+</form>
+
 <div id="response"></div>
+<script>
+  async function update(reader) {
+    const decoder = new TextDecoder();
+    while (true) {
+      const { value, done } = await reader.read();
+      if (done) break;
+      const chunk = decoder.decode(value);
+      document.querySelector("#response").innerText += chunk;
+    }
+  }
+
+  document.querySelector("#submit-button")?.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (e.keyCode == 13) {
+      const input = document.querySelector("#prompt-box").value;
+
+      document.querySelector("#response").innerText = "Waiting...";
+      const data = fetch("/prompt/text", {
+        method: "POST",
+        body: JSON.stringify({ prompt: input }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((res) => res.body.getReader())
+        .then((reader) => {
+          document.querySelector("#response").innerText = "";
+          update(reader);
+        });
+    }
+  });
+</script>
 {% endblock %}

@@ -1,6 +1,8 @@
 use std::path::PathBuf;
 
+pub mod phi;
 pub mod qdrant;
+pub mod tokenizer;
 
 use anyhow::Result;
 use fastembed::{

@@ -27,7 +27,7 @@ impl Args {
 
                 let qdrant = Qdrant::from_url("http://localhost:6334", None).unwrap();
 
-                qdrant.create_collection().await.unwrap();
+                // qdrant.create_collection().await.unwrap();
 
                 qdrant.insert_docs(embeddings).await.unwrap();
             }

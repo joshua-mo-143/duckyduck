@@ -5,3 +5,6 @@ docker-qdrant:
 
 up:
 	cargo run --bin server
+
+embed:
+	cargo run --bin cli embed

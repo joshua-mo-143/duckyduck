@@ -1,4 +1,5 @@
-use axum::{extract::State, Form};
+use axum::{body::Body, extract::State, response::IntoResponse as AxumResponse, Form, Json};
+
 use serde::Deserialize;
 
 use parser::TCode;
@@ -41,6 +42,14 @@ pub async fn prompt(
         .unwrap();
 
     TableResult { results }
+}
+
+pub async fn prompt_text(
+    State(state): State<AppState>,
+    Json(Prompt { prompt }): Json<Prompt>,
+) -> impl AxumResponse {
+    println!("Request received!");
+    Body::from_stream(state.ort.run_inference(prompt, 1024))
 }
 
 pub async fn homepage() -> impl AskamaResponse {
